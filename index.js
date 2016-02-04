@@ -1,8 +1,8 @@
-(function() {
+(function () {
     'use strict';
     angular.module('ngTimeSlider', [])
-           .constant('$', window.$)
-           .directive('ngTimeSlider', ngTimeSlider);
+        .constant('$', window.$)
+        .directive('ngTimeSlider', ngTimeSlider);
 
     ngTimeSlider.$inject = ['$'];
 
@@ -19,9 +19,16 @@
 
                 var timeSliderId = '#' + attrs.id;
 
-                scope.$watch('cells', function(cells) {
+                scope.$watch('startAt', function (startAt) {
+                    console.log(startAt);
+                    $(timeSliderId).TimeSlider({
+                        start_timestamp: startAt
+                    });
+                }, true);
+
+                scope.$watch('cells', function (cells) {
                     $(timeSliderId).TimeSlider('remove_all');
-                    cells.forEach(function(cell) {
+                    cells.forEach(function (cell) {
                         $(timeSliderId).TimeSlider('add', cell);
                     });
                 }, true);
