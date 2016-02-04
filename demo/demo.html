@@ -17,6 +17,7 @@
          cells="cells"
          start-at="startAt"
          cell-prefix-label="prefix"
+         on-click="onClick"
          id="slider123"
          target-id="slider123"
          class="time-slider"></div>
@@ -70,6 +71,10 @@
         $scope.changeDate = function() {
             $scope.disableChangeDateButton = true;
             $scope.startAt = toTimestamp(startAt.clone().add(1, 'd'));
+        };
+
+        $scope.onClick = function(id) {
+            alert('cell '  + id +  ' was clicked');
         };
 
         $scope.addCell = function() {

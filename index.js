@@ -12,7 +12,8 @@
             scope: {
                 startAt: '=',
                 cells: '=',
-                cellPrefixLabel: '@'
+                cellPrefixLabel: '@',
+                onClick: '&'
             },
 
             link: function (scope, $element, attrs) {
@@ -39,7 +40,12 @@
                     ruler_draggable: false,
                     start_timestamp: scope.startAt,
                     cell_prefix_label: scope.cellPrefixLabel,
-                    init_cells: null
+                    init_cells: null,
+                    on_click_timecell_callback: function (id) {
+                        if ($scope.onClick) {
+                            $scope.onClick(id);
+                        }
+                    }
                 });
             }
         };
