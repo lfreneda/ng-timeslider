@@ -18,7 +18,12 @@
          start-at="startAt"
          cell-prefix-label="prefix"
          id="slider123"
+         target-id="slider123"
          class="time-slider"></div>
+</div>
+
+<div>
+    <button ng-disabled="disableAddButton" ng-click="addCell();">add cell</button>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -60,6 +65,18 @@
                 }
             }
         ];
+
+        $scope.addCell = function() {
+            $scope.disableAddButton = true;
+            $scope.cells.push({
+                '_id': 'c3',
+                'start': toTimestamp(dayInit.clone().add(18, 'h')),
+                'stop': toTimestamp(dayInit.clone().add(19, 'h')),
+                'style': {
+                    'background-color': '#2196F3'
+                }
+            });
+        };
     });
 </script>
 </body>

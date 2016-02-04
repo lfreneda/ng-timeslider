@@ -10,21 +10,29 @@
         return {
             restrict: 'A',
             scope: {
-                startAt: '=startAt',
-                cells: '=cells',
+                startAt: '=',
+                cells: '=',
                 cellPrefixLabel: '@'
             },
-            link: function (scope, $element) {
 
-                var elementId = '#' + $element.attr('id');
-                $(elementId).TimeSlider({
+            link: function (scope, $element, attrs) {
+
+                var timeSliderId = '#' + attrs.id;
+
+                scope.$watch('cells', function(cells) {
+                    cells.forEach(function(cell) {
+                        $(timeSliderId).TimeSlider('add', cell);
+                    });
+                }, true);
+
+                $(timeSliderId).TimeSlider({
                     current_timestamp: null,
                     hours_per_ruler: 26,
                     cell_draggable: false,
                     ruler_draggable: false,
                     start_timestamp: scope.startAt,
                     cell_prefix_label: scope.cellPrefixLabel,
-                    init_cells: scope.cells
+                    init_cells: null
                 });
             }
         };
