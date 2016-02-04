@@ -20,6 +20,7 @@
                 var timeSliderId = '#' + attrs.id;
 
                 scope.$watch('cells', function(cells) {
+                    $(timeSliderId).TimeSlider('remove_all');
                     cells.forEach(function(cell) {
                         $(timeSliderId).TimeSlider('add', cell);
                     });
