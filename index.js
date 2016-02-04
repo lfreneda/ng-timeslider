@@ -4,22 +4,20 @@
         .constant('$', window.$)
         .directive('ngTimeSlider', ngTimeSlider);
 
-    ngTimeSlider.$inject = ['$'];
+    ngTimeSlider.$inject = ['$', '$rootScope'];
 
-    function ngTimeSlider($) {
+    function ngTimeSlider($, $rootScope) {
         return {
             restrict: 'A',
             scope: {
                 startAt: '=',
                 cells: '=',
-                cellPrefixLabel: '@',
-                onClick: '&'
+                cellPrefixLabel: '@'
             },
 
-            link: function (scope, $element, attrs) {
+            link: function (scope, $element, attr) {
 
-                var timeSliderId = '#' + attrs.id;
-
+                var timeSliderId = '#' + attr.id;
                 scope.$watch('startAt', function (startAt) {
                     $(timeSliderId).TimeSlider({
                         start_timestamp: startAt
@@ -34,17 +32,16 @@
                 }, true);
 
                 $(timeSliderId).TimeSlider({
+                    init_cells: null,
                     current_timestamp: null,
                     hours_per_ruler: 26,
                     cell_draggable: false,
                     ruler_draggable: false,
                     start_timestamp: scope.startAt,
                     cell_prefix_label: scope.cellPrefixLabel,
-                    init_cells: null,
+
                     on_click_timecell_callback: function (id) {
-                        if ($scope.onClick) {
-                            $scope.onClick(id);
-                        }
+                        $rootScope.$broadcast('event:cell-clicked', { id: id });
                     }
                 });
             }

@@ -10,16 +10,14 @@
     <link href="../lib/timeslider.css" rel="stylesheet" type="text/css"/>
 </head>
 
-<body ng-controller="MainCtrl">
+<body ng-controller="MainCtrl as vm">
 
 <div style="margin: 50px 30px;">
     <div ng-time-slider
          cells="cells"
          start-at="startAt"
          cell-prefix-label="prefix"
-         on-click="onClick"
          id="slider123"
-         target-id="slider123"
          class="time-slider"></div>
 </div>
 
@@ -39,6 +37,10 @@
 <script type="text/javascript">
     var app = angular.module('timeSliderDemoApp', ['angularMoment', 'ngTimeSlider']);
     app.controller('MainCtrl', function($scope, moment) {
+
+        $scope.$on('event:cell-clicked', function (event, cell) {
+            alert(cell.id);
+        });
 
         function toTimestamp(momentDate) {
             return momentDate.toDate().getTime();
@@ -71,10 +73,6 @@
         $scope.changeDate = function() {
             $scope.disableChangeDateButton = true;
             $scope.startAt = toTimestamp(startAt.clone().add(1, 'd'));
-        };
-
-        $scope.onClick = function(id) {
-            alert('cell '  + id +  ' was clicked');
         };
 
         $scope.addCell = function() {
