@@ -20,7 +20,6 @@
                 var timeSliderId = '#' + attrs.id;
 
                 scope.$watch('startAt', function (startAt) {
-                    console.log(startAt);
                     $(timeSliderId).TimeSlider({
                         start_timestamp: startAt
                     });
