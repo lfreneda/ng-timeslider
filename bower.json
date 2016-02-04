@@ -5,7 +5,11 @@
     "Luiz Freneda <lfreneda@gmail.com>"
   ],
   "description": "Angular directive for jQuery TimeSlider Plugin (https://github.com/v-v-vishnevskiy/timeslider)",
-  "main": "index.js",
+  "main": [
+    "lib/timeslider.css",
+    "lib/timeslider.js",
+    "index.js"
+  ],
   "moduleType": [],
   "keywords": [
     "timeslider",
@@ -24,5 +28,7 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+  }
 }
