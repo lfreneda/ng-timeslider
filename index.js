@@ -40,6 +40,7 @@
                     start_timestamp: scope.startAt,
                     cell_prefix_label: scope.cellPrefixLabel,
                     show_secs: false,
+                    show_date_on_ruler: false,
 
                     on_click_timecell_callback: function (id) {
                         $rootScope.$broadcast('event:cell-clicked', { id: id });
